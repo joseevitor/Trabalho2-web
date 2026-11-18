@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Placa de Petri</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Simulador de Placa de Petri</h1>
+
+    <!-- informações (RF07 e RF08) -->
+    <div class="info">
+      <span>Geração: <strong>{{ geracao }}</strong></span>
+      <span>Células vivas: <strong>{{ vivas }}</strong></span>
+      <span>Estado: <strong>{{ textoEstado }}</strong></span>
+    </div>
+
+    <!-- botões de controle -->
+    <div class="controles">
+      <button v-if="!rodando" @click="iniciar">
+        {{ geracao === 0 ? 'Iniciar' : 'Continuar' }}
+      </button>
+      <button v-else @click="pausar">Pausar</button>
+
+      <button @click="passo">Próximo passo</button>
+      <button @click="editar">Editar</button>
+      <button @click="reiniciar">Reiniciar</button>
+    </div>
+
+    <!-- configurações -->
+    <div class="config">
+      <label>
+        Tamanho da grade (de {{ MIN }} a {{ MAX }}):
+        <input type="number" v-model.number="tamanho" :min="MIN" :max="MAX">
+      </label>
+
+      <label>
+        Velocidade:
+        <input type="range" min="50" max="1000" step="50" v-model.number="intervalo">
+        {{ intervalo }} ms
+      </label>
+    </div>
+
+    <p v-if="mensagem" class="mensagem">{{ mensagem }}</p>
+
+    <!-- a grade: cada célula é um quadradinho desenhado a partir da matriz (RF01) -->
+    <div class="grade" :style="estiloGrade">
+      <template v-for="(linha, i) in grade" :key="i">
+        <div
+          v-for="(celula, j) in linha"
+          :key="i + '-' + j"
+          class="celula"
+          :class="{ viva: celula, editavel: editando }"
+          @click="alternarCelula(i, j)"
+        ></div>
+      </template>
+    </div>
+
+    <p class="dica">
+      Clique nas células para deixá-las vivas ou mortas (só dá pra clicar no modo edição).
+    </p>
+  </div>
+
+  <!-- Vue 3 pelo CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="life.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
