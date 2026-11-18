@@ -1,9 +1,3 @@
-// ============================================================
-// LÓGICA DO JOGO (não mexe com Vue nem com a tela)
-// Deixei separado da interface como o professor pediu.
-// A grade é uma matriz n x n: true = viva, false = morta
-// ============================================================
-
 // cria uma matriz n x n com todo mundo morto
 function criarMatriz(n) {
   const matriz = [];
@@ -18,7 +12,7 @@ function criarMatriz(n) {
 }
 
 // conta quantas vizinhas vivas a célula (i, j) tem
-// (olha as 8 em volta; o que sai da grade é ignorado, sem dar a volta)
+//olha as 8 em volta; o que sai da grade é ignorado, sem dar a volta
 function contarVizinhas(matriz, i, j) {
   const n = matriz.length;
   let total = 0;
@@ -72,9 +66,4 @@ function contarVivas(matriz) {
     }
   }
   return total;
-}
-
-// isso aqui é só pra eu conseguir testar no node (no navegador é ignorado)
-if (typeof module !== 'undefined') {
-  module.exports = { criarMatriz, contarVizinhas, proximaGeracao, contarVivas };
 }

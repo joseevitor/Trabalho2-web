@@ -1,7 +1,5 @@
-// ============================================================
-// PARTE DO VUE (interface)
-// Usa as funções do life.js pra calcular as gerações
-// ============================================================
+// usa as funções do life.js pra calcular as geracoes
+
 
 const TAMANHO_PADRAO = 10;
 const TAMANHO_MIN = 3;
@@ -57,13 +55,13 @@ Vue.createApp({
       this.reiniciar();
     },
 
-    /*// se mudar a velocidade com a simulação rodando, reinicia o timer
+    // se mudar a velocidade com a simulação rodando, reinicia o timer
     intervalo() {
       if (this.rodando) {
         this.pararTimer();
         this.comecarTimer();
       }
-    }*/
+    }
   },
 
   methods: {
